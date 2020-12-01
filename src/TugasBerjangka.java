@@ -300,21 +300,23 @@ public class TugasBerjangka extends tugas {
     }//GEN-LAST:event_StatusTugasActionPerformed
 
     private void TambahTugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TambahTugasActionPerformed
-        setTugas(getNamaTugas(),getStatusTugas(),getTglM(),getTglS(),getHari());
+        if(getTglM().length() == 0){
+            setTugas(getNamaTugas(),getStatusTugas(),getTglS(),getHari());   
+        } else{
+            setTugas(getNamaTugas(),getStatusTugas(),getTglM(),getTglS(),getHari());   
+        }
+        
         tampilData();
-        JOptionPane.showMessageDialog(rootPane, "Tugas Berhasil Ditambahkan");
     }//GEN-LAST:event_TambahTugasActionPerformed
 
     private void EditTugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditTugasActionPerformed
         editTugas(getIDTugas(), getNamaTugas(),getStatusTugas(),getTglM(),getTglS());
         tampilData();
-        JOptionPane.showMessageDialog(rootPane, "Tugas Berhasil Diubah");
     }//GEN-LAST:event_EditTugasActionPerformed
 
     private void HapusTugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HapusTugasActionPerformed
         deleteTugas(getIDTugas());
         tampilData();
-        JOptionPane.showMessageDialog(rootPane, "Tugas Berhasil Dihapus");
     }//GEN-LAST:event_HapusTugasActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -437,6 +439,21 @@ public class TugasBerjangka extends tugas {
         
     }
     
+    public void setTugas(String nama, String status, String selesai, String hari){
+
+        try{
+
+            Statement statement = (Statement) Db_Koneksi.getKoneksi().createStatement();
+            String sql = "INSERT INTO tugas VALUES(null,'"+nama+"','"+status+"','"+getTglHariIni()+"','"+selesai+"','"+hari+"','"+getTglHariIni()+"',2)";
+            PreparedStatement p = (PreparedStatement) Db_Koneksi.getKoneksi().prepareStatement(sql);
+            p.executeUpdate();
+            JOptionPane.showMessageDialog(rootPane, "Tugas Berhasil Ditambahkan");
+        }catch (SQLException err){
+            JOptionPane.showMessageDialog(null, "Tugas Gagal Ditambahkan!");
+
+        }
+        
+    }
     
     public void setTugas(String nama, String status, String mulai, String selesai, String hari){
         
@@ -446,8 +463,9 @@ public class TugasBerjangka extends tugas {
             String sql = "INSERT INTO tugas VALUES(null,'"+nama+"','"+status+"','"+mulai+"','"+selesai+"','"+hari+"','"+getTglHariIni()+"',2)";
             PreparedStatement p = (PreparedStatement) Db_Koneksi.getKoneksi().prepareStatement(sql);
             p.executeUpdate();
+            JOptionPane.showMessageDialog(rootPane, "Tugas Berhasil Ditambahkan");
         }catch (SQLException err){
-            JOptionPane.showMessageDialog(null, err.getMessage() );
+            JOptionPane.showMessageDialog(null, "Tugas Gagal Ditambahkan!");
             
         }
         
@@ -460,8 +478,9 @@ public class TugasBerjangka extends tugas {
             String sql = "DELETE FROM tugas WHERE IDTugas="+id;
             PreparedStatement p = (PreparedStatement) Db_Koneksi.getKoneksi().prepareStatement(sql);
             p.executeUpdate();
+            JOptionPane.showMessageDialog(rootPane, "Tugas Berhasil Dihapus");
         }catch (SQLException err){
-            JOptionPane.showMessageDialog(null, err.getMessage() );
+            JOptionPane.showMessageDialog(null, "Tugas Gagal Dihapus!" );
         }
     }
     
@@ -472,8 +491,9 @@ public class TugasBerjangka extends tugas {
             String sql = "UPDATE tugas SET NamaTugas='"+nama+"', StatusTugas='"+status+"', TglMulai='"+mulai+"', TglKadaluarsa='"+selesai+"' WHERE IDTugas="+id;
             PreparedStatement p = (PreparedStatement) Db_Koneksi.getKoneksi().prepareStatement(sql);
             p.executeUpdate();
+            JOptionPane.showMessageDialog(rootPane, "Tugas Berhasil Diubah");
         }catch (SQLException err){
-            JOptionPane.showMessageDialog(null, err.getMessage() );
+            JOptionPane.showMessageDialog(null, "Tugas Gagal Diubah!" );
         }
     }
     
