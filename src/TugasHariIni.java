@@ -1,6 +1,7 @@
 import java.sql.Connection;
 import java.sql.ResultSet;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import Koneksi.Db_Koneksi;
 import java.sql.SQLException;
 import com.mysql.jdbc.*;
@@ -26,10 +27,12 @@ public class TugasHariIni extends tugas {
         IDTugas.setEnabled(false);
         
         tabModel = new DefaultTableModel();
-        jTable1.setModel(tabModel);
         tabModel.addColumn("ID Tugas");
         tabModel.addColumn("Nama Tugas");
         tabModel.addColumn("Status Tugas");
+        jTable1.setModel(tabModel);
+        TableColumnModel tcm = jTable1.getColumnModel();
+        tcm.removeColumn(tcm.getColumn(0));
         tampilData();
         
     }
@@ -60,7 +63,6 @@ public class TugasHariIni extends tugas {
         jLabel2 = new javax.swing.JLabel();
         EditTugas = new javax.swing.JButton();
         IDTugas = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         StatusTugas1 = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
 
@@ -185,8 +187,7 @@ public class TugasHariIni extends tugas {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
-        jLabel3.setText("ID Tugas :");
+        IDTugas.setVisible(false);
 
         StatusTugas1.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         StatusTugas1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Belum Selesai", "Selesai" }));
@@ -227,10 +228,7 @@ public class TugasHariIni extends tugas {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(IDTugas, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(IDTugas, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(NamaTugas, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -279,10 +277,9 @@ public class TugasHariIni extends tugas {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(IDTugas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel3)
                         .addComponent(RutinitasHarian))
                     .addComponent(HapusTugas))
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -308,7 +305,6 @@ public class TugasHariIni extends tugas {
     private void TambahTugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TambahTugasActionPerformed
 //        System.out.println(getHari()+" "+getJenis());
         setTugas(getNamaTugas(),getStatusTugas(),getHari(),getJenis());
-        
         tampilData();
         JOptionPane.showMessageDialog(rootPane, "Tugas Berhasil Ditambah");
     }//GEN-LAST:event_TambahTugasActionPerformed
@@ -320,9 +316,9 @@ public class TugasHariIni extends tugas {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         try{
             int row = jTable1.rowAtPoint(evt.getPoint());
-            id = jTable1.getValueAt(row, 0).toString();
-            nama = jTable1.getValueAt(row, 1).toString();
-            status = jTable1.getValueAt(row, 2).toString();
+            id = jTable1.getModel().getValueAt(row, 0).toString();
+            nama = jTable1.getValueAt(row, 0).toString();
+            status = jTable1.getValueAt(row, 1).toString();
             
             setIDTugas(String.valueOf(id));
             setTugas(String.valueOf(nama));
@@ -464,7 +460,7 @@ public class TugasHariIni extends tugas {
     public void setTugas(String nama, String status, String hari, String jenis){
         try{
             Statement statement = (Statement) Db_Koneksi.getKoneksi().createStatement();
-            String sql = "INSERT INTO tugas VALUES(null,'"+nama+"','"+status+"',0000-00-00,0000-00-00,'"+hari+"','"+getTglHariIni()+"','"+jenis+"')";
+            String sql = "INSERT INTO tugas VALUES(null,'"+nama+"','"+status+"','"+getTglHariIni()+"','"+getTglHariIni()+"','"+hari+"','"+getTglHariIni()+"','"+jenis+"')";
             PreparedStatement p = (PreparedStatement) Db_Koneksi.getKoneksi().prepareStatement(sql);
             p.executeUpdate();
             
@@ -545,7 +541,6 @@ public class TugasHariIni extends tugas {
     private javax.swing.JButton TugasUmum;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;

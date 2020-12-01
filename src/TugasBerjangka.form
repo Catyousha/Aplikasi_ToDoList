@@ -99,8 +99,6 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="StatusTugas" min="-2" pref="157" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="IDTugas" min="-2" pref="83" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                           <Component id="HapusTugas" min="-2" pref="131" max="-2" attributes="0"/>
@@ -146,13 +144,10 @@
                           <Component id="StatusTugas" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                          <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="IDTugas" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="IDTugas" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="HapusTugas" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="39" max="32767" attributes="0"/>
+                  <EmptySpace pref="28" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -365,14 +360,9 @@
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="IDTugas">
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel5">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Berlin Sans FB" size="14" style="0"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="ID Tugas :"/>
-          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="IDTugas.setVisible(false);"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JComboBox" name="StatusTugas">
           <Properties>

@@ -1,6 +1,7 @@
 import java.sql.Connection;
 import java.sql.ResultSet;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import Koneksi.Db_Koneksi;
 import java.sql.SQLException;
 import com.mysql.jdbc.*;
@@ -21,12 +22,15 @@ public class TugasBerjangka extends tugas {
         IDTugas.setEnabled(false);
         
         tabModel = new DefaultTableModel();
-        jTable1.setModel(tabModel);
         tabModel.addColumn("ID Tugas");
         tabModel.addColumn("Nama Tugas");
         tabModel.addColumn("Status Tugas");
         tabModel.addColumn("Tanggal Mulai");
         tabModel.addColumn("Tanggal Berakhir");
+        jTable1.setModel(tabModel);
+
+        TableColumnModel tcm = jTable1.getColumnModel();
+        tcm.removeColumn(tcm.getColumn(0));
         tampilData();
         
     }
@@ -57,7 +61,6 @@ public class TugasBerjangka extends tugas {
         jLabel2 = new javax.swing.JLabel();
         EditTugas = new javax.swing.JButton();
         IDTugas = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
         StatusTugas = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
 
@@ -177,8 +180,7 @@ public class TugasBerjangka extends tugas {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
-        jLabel5.setText("ID Tugas :");
+        IDTugas.setVisible(false);
 
         StatusTugas.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         StatusTugas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Belum Selesai", "Selesai" }));
@@ -234,8 +236,6 @@ public class TugasBerjangka extends tugas {
                         .addGap(18, 18, 18)
                         .addComponent(StatusTugas, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(IDTugas, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(40, 40, 40)
                         .addComponent(HapusTugas, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -272,11 +272,9 @@ public class TugasBerjangka extends tugas {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(StatusTugas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel4))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel5)
-                        .addComponent(IDTugas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(IDTugas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(HapusTugas))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -322,11 +320,11 @@ public class TugasBerjangka extends tugas {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         try{
             int row = jTable1.rowAtPoint(evt.getPoint());
-            id = jTable1.getValueAt(row, 0).toString();
-            nama = jTable1.getValueAt(row, 1).toString();
-            status = jTable1.getValueAt(row, 2).toString();
-            tglM = jTable1.getValueAt(row, 3).toString();
-            tglS = jTable1.getValueAt(row, 4).toString();
+            id = jTable1.getModel().getValueAt(row, 0).toString();
+            nama = jTable1.getValueAt(row, 0).toString();
+            status = jTable1.getValueAt(row, 1).toString();
+            tglM = jTable1.getValueAt(row, 2).toString();
+            tglS = jTable1.getValueAt(row, 3).toString();
             
             DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
             int srow = jTable1.getSelectedRow();
@@ -528,7 +526,6 @@ public class TugasBerjangka extends tugas {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

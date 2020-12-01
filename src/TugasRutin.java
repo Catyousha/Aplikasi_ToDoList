@@ -1,6 +1,7 @@
 import java.sql.Connection;
 import java.sql.ResultSet;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import Koneksi.Db_Koneksi;
 import java.sql.SQLException;
 import com.mysql.jdbc.*;
@@ -17,10 +18,12 @@ public class TugasRutin extends tugas {
         IDTugas.setEnabled(false);
         
         tabModel = new DefaultTableModel();
-        jTable1.setModel(tabModel);
         tabModel.addColumn("ID Tugas");
         tabModel.addColumn("Nama Tugas");
         tabModel.addColumn("Hari");
+        jTable1.setModel(tabModel);
+        TableColumnModel tcm = jTable1.getColumnModel();
+        tcm.removeColumn(tcm.getColumn(0));
         tampilData();
     }
 
@@ -48,7 +51,6 @@ public class TugasRutin extends tugas {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         IDTugas = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
         EditTugas = new javax.swing.JButton();
         HariRutinitas = new javax.swing.JComboBox<>();
 
@@ -111,17 +113,9 @@ public class TugasRutin extends tugas {
 
             },
             new String [] {
-                "", "Nama Tugas", "Hari"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Boolean.class, java.lang.String.class, java.lang.String.class
-            };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
             }
-        });
+        ));
         jTable1.setSelectionBackground(new java.awt.Color(255, 153, 153));
         jTable1.addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentAdded(java.awt.event.ContainerEvent evt) {
@@ -134,12 +128,6 @@ public class TugasRutin extends tugas {
             }
         });
         jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(10);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-        }
 
         jLabel1.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         jLabel1.setText("Nama Tugas :");
@@ -161,14 +149,13 @@ public class TugasRutin extends tugas {
         jLabel3.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         jLabel3.setText("Tugas yang muncul adalah tugas rutin yang telah ditambahkan sebelumnya");
 
+        IDTugas.setEditable(false);
         IDTugas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 IDTugasActionPerformed(evt);
             }
         });
-
-        jLabel4.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
-        jLabel4.setText("ID Tugas :");
+        IDTugas.setVisible(false);
 
         EditTugas.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
         EditTugas.setText("Simpan Perubahan");
@@ -199,8 +186,7 @@ public class TugasRutin extends tugas {
                         .addGap(87, 87, 87)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4))
+                            .addComponent(jLabel2))
                         .addGap(18, 18, 18)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -212,7 +198,7 @@ public class TugasRutin extends tugas {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(TambahTugas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(HapusTugas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(EditTugas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(EditTugas, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)))
                     .addComponent(jScrollPane1))
                 .addGap(31, 31, 31))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -248,10 +234,9 @@ public class TugasRutin extends tugas {
                     .addComponent(HariRutinitas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
                     .addComponent(IDTugas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(HapusTugas))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -278,17 +263,13 @@ public class TugasRutin extends tugas {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTable1ComponentAdded
 
-    private void IDTugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IDTugasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_IDTugasActionPerformed
-
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         
         try{
             int row = jTable1.rowAtPoint(evt.getPoint());
-            id = jTable1.getValueAt(row, 0).toString();
-            nama = jTable1.getValueAt(row, 1).toString();
-            hari = jTable1.getValueAt(row, 2).toString();
+            id = jTable1.getModel().getValueAt(row, 0).toString();
+            nama = jTable1.getValueAt(row, 0).toString();
+            hari = jTable1.getValueAt(row, 1).toString();
             
             setIDTugas(String.valueOf(id));
             setTugas(String.valueOf(nama));
@@ -330,6 +311,10 @@ public class TugasRutin extends tugas {
     private void TugasRutinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TugasRutinActionPerformed
         tRutin();
     }//GEN-LAST:event_TugasRutinActionPerformed
+
+    private void IDTugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IDTugasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_IDTugasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -381,7 +366,6 @@ public class TugasRutin extends tugas {
            
             while (res.next()) {
                 Object[] data = new Object[3];
-                  
                 data[0] = res.getString("IDTugas") ;
                 data[1] = res.getString("NamaTugas");
                 data[2] = res.getString("HariRutinitas");
@@ -398,7 +382,7 @@ public class TugasRutin extends tugas {
     public void setTugas(String nama, String harirutinitas){
         try{
             Statement statement = (Statement) Db_Koneksi.getKoneksi().createStatement();
-            String sql = "INSERT INTO tugas VALUES(null,'"+nama+"','',0000-00-00,0000-00-00,'"+harirutinitas+"','"+getTglHariIni()+"',4)";
+            String sql = "INSERT INTO tugas VALUES(null,'"+nama+"','',NULL, NULL,'"+harirutinitas+"','"+getTglHariIni()+"',4)";
             PreparedStatement p = (PreparedStatement) Db_Koneksi.getKoneksi().prepareStatement(sql);
             p.executeUpdate();
         }catch (SQLException err){
@@ -481,7 +465,6 @@ public class TugasRutin extends tugas {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
