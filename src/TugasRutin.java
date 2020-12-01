@@ -256,7 +256,6 @@ public class TugasRutin extends tugas {
     private void TambahTugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TambahTugasActionPerformed
         setTugas(getNamaTugas(), getHariRutinitas());
         tampilData();
-        JOptionPane.showMessageDialog(rootPane, "Tugas Berhasil Ditambahkan");
     }//GEN-LAST:event_TambahTugasActionPerformed
 
     private void jTable1ComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jTable1ComponentAdded
@@ -287,13 +286,11 @@ public class TugasRutin extends tugas {
     private void HapusTugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HapusTugasActionPerformed
         deleteTugas(getIDTugas());
         tampilData();
-        JOptionPane.showMessageDialog(rootPane, "Tugas Berhasil Dihapus");
     }//GEN-LAST:event_HapusTugasActionPerformed
 
     private void EditTugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditTugasActionPerformed
         editTugas(getIDTugas(),getNamaTugas(),getHariRutinitas());
         tampilData();
-        JOptionPane.showMessageDialog(rootPane, "Tugas Berhasil Diubah");
     }//GEN-LAST:event_EditTugasActionPerformed
 
     private void TugasUmumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TugasUmumActionPerformed
@@ -385,8 +382,9 @@ public class TugasRutin extends tugas {
             String sql = "INSERT INTO tugas VALUES(null,'"+nama+"','',NULL, NULL,'"+harirutinitas+"','"+getTglHariIni()+"',4)";
             PreparedStatement p = (PreparedStatement) Db_Koneksi.getKoneksi().prepareStatement(sql);
             p.executeUpdate();
+            JOptionPane.showMessageDialog(rootPane, "Tugas Berhasil Ditambahkan");
         }catch (SQLException err){
-            JOptionPane.showMessageDialog(null, err.getMessage() );
+            JOptionPane.showMessageDialog(null, "Tugas Gagal Ditambahkan!" );
         }
         
     }
@@ -398,8 +396,9 @@ public class TugasRutin extends tugas {
             String sql = "UPDATE tugas SET NamaTugas='"+nama+"', HariRutinitas='"+hari+"' WHERE IDTugas="+id;
             PreparedStatement p = (PreparedStatement) Db_Koneksi.getKoneksi().prepareStatement(sql);
             p.executeUpdate();
+            JOptionPane.showMessageDialog(rootPane, "Tugas Berhasil Diubah");
         }catch (SQLException err){
-            JOptionPane.showMessageDialog(null, err.getMessage() );
+            JOptionPane.showMessageDialog(null, "Tugas Gagal Diubah!");
         }
     }
     
@@ -410,8 +409,9 @@ public class TugasRutin extends tugas {
             String sql = "DELETE FROM tugas WHERE IDTugas="+id;
             PreparedStatement p = (PreparedStatement) Db_Koneksi.getKoneksi().prepareStatement(sql);
             p.executeUpdate();
+            JOptionPane.showMessageDialog(rootPane, "Tugas Berhasil Dihapus");
         }catch (SQLException err){
-            JOptionPane.showMessageDialog(null, err.getMessage() );
+            JOptionPane.showMessageDialog(null, "Tugas Gagal Dihapus!");
         }
     }
     

@@ -15,11 +15,6 @@ public class TugasHariIni extends tugas {
 
     private DefaultTableModel tabModel;
     private javax.swing.JCheckBox check;
-    private String cek=null;
-    
-    Calendar cal = Calendar.getInstance();
-    SimpleDateFormat tanggal = new SimpleDateFormat("yyyy-MM-dd");
-    String tgl = tanggal.format(cal.getTime());
     
     public TugasHariIni() {
         initComponents();
@@ -306,7 +301,6 @@ public class TugasHariIni extends tugas {
 //        System.out.println(getHari()+" "+getJenis());
         setTugas(getNamaTugas(),getStatusTugas(),getHari(),getJenis());
         tampilData();
-        JOptionPane.showMessageDialog(rootPane, "Tugas Berhasil Ditambah");
     }//GEN-LAST:event_TambahTugasActionPerformed
 
     private void StatusTugas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StatusTugas1ActionPerformed
@@ -326,12 +320,7 @@ public class TugasHariIni extends tugas {
             
 //            id2=String.valueOf(id);
             
-            cekJenis();
-            if(cek==null){
-                RutinitasHarian.setSelected(false);
-            }else{
-                RutinitasHarian.setSelected(true);
-            }
+            RutinitasHarian.setSelected( getRutinitasTugas() );
 
             IDTugas.setText(String.valueOf(id));
             NamaTugas.setText(String.valueOf(nama));
@@ -345,13 +334,11 @@ public class TugasHariIni extends tugas {
     private void EditTugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditTugasActionPerformed
         editTugas(getIDTugas(),getNamaTugas(),getStatusTugas(),getHari(),getJenis());
         tampilData();
-        JOptionPane.showMessageDialog(rootPane, "Tugas Berhasil Diubah");
     }//GEN-LAST:event_EditTugasActionPerformed
 
     private void HapusTugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HapusTugasActionPerformed
         deleteTugas(getIDTugas());
         tampilData();
-        JOptionPane.showMessageDialog(rootPane, "Tugas Berhasil Dihapus");
     }//GEN-LAST:event_HapusTugasActionPerformed
 
     private void TugasUmumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TugasUmumActionPerformed
@@ -399,28 +386,25 @@ public class TugasHariIni extends tugas {
         return status;
     }
     
-    public void cekJenis(){
+    public boolean getRutinitasTugas(){
+        boolean cek = false;
         try {
             Statement stat = (Statement) Db_Koneksi.getKoneksi( ).createStatement( );
             String sql        = "SELECT * FROM tugas WHERE Jenis=5 AND IDTugas="+this.id;
             ResultSet res   = stat.executeQuery(sql);
-            cek = null;
             while (res.next()) {
                 Object[] data = new Object[1];
                   
                 data[0] = res.getString("IDTugas") ;
                 
-                if(data[0]==null){
-                    cek = null;
-                }else{
-                    cek = (String)data[0];
+                if(data[0]!=null){
+                    cek = true;
                 }
-
             }
-            
         } catch (SQLException err) {
              JOptionPane.showMessageDialog(null, err.getMessage() );
         }
+        return cek;
     }
     
     public String getJenis(){
@@ -447,7 +431,9 @@ public class TugasHariIni extends tugas {
                 data[0] = res.getString("IDTugas") ;
                 data[1] = res.getString("NamaTugas");
                 data[2] = res.getString("StatusTugas");
-
+                if(!( res.getString("TglSkrg").equals(getTglHariIni()) )){
+                    deleteTugas(); break;
+                }
                 tabModel.addRow(data);
 
             }
@@ -463,9 +449,9 @@ public class TugasHariIni extends tugas {
             String sql = "INSERT INTO tugas VALUES(null,'"+nama+"','"+status+"','"+getTglHariIni()+"','"+getTglHariIni()+"','"+hari+"','"+getTglHariIni()+"','"+jenis+"')";
             PreparedStatement p = (PreparedStatement) Db_Koneksi.getKoneksi().prepareStatement(sql);
             p.executeUpdate();
-            
+            JOptionPane.showMessageDialog(rootPane, "Tugas Berhasil Ditambahkan");
         }catch (SQLException err){
-            JOptionPane.showMessageDialog(null, err.getMessage() );
+            JOptionPane.showMessageDialog(null, "Tugas Gagal Ditambahkan!");
         }
         
     }
@@ -477,8 +463,20 @@ public class TugasHariIni extends tugas {
             String sql = "UPDATE tugas SET NamaTugas='"+nama+"', StatusTugas='"+status+"', HariRutinitas='"+hari+"', Jenis='"+jenis+"' WHERE IDTugas="+id;
             PreparedStatement p = (PreparedStatement) Db_Koneksi.getKoneksi().prepareStatement(sql);
             p.executeUpdate();
+            JOptionPane.showMessageDialog(rootPane, "Tugas Berhasil Diubah");
         }catch (SQLException err){
-            JOptionPane.showMessageDialog(null, err.getMessage() );
+            JOptionPane.showMessageDialog(null, "Tugas Gagal Diubah!");
+        }
+    }
+    
+    public void deleteTugas(){
+        try{
+            Statement statement = (Statement) Db_Koneksi.getKoneksi().createStatement();
+            String sql = "DELETE FROM tugas WHERE Jenis = 3";
+            PreparedStatement p = (PreparedStatement) Db_Koneksi.getKoneksi().prepareStatement(sql);
+            p.executeUpdate();
+        }catch (SQLException err){
+            JOptionPane.showMessageDialog(null, "Terjadi kesalahan!");
         }
     }
     
@@ -489,8 +487,9 @@ public class TugasHariIni extends tugas {
             String sql = "DELETE FROM tugas WHERE IDTugas="+id;
             PreparedStatement p = (PreparedStatement) Db_Koneksi.getKoneksi().prepareStatement(sql);
             p.executeUpdate();
+            JOptionPane.showMessageDialog(rootPane, "Tugas Berhasil Dihapus");
         }catch (SQLException err){
-            JOptionPane.showMessageDialog(null, err.getMessage() );
+            JOptionPane.showMessageDialog(null, "Tugas Gagal Dihapus!");
         }
     }
     
