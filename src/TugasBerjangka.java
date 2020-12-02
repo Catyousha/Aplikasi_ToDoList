@@ -10,7 +10,7 @@ import java.sql.*;
 import java.text.SimpleDateFormat;
 import javax.swing.JTextField;
 
-public class TugasBerjangka extends tugas {
+public class TugasBerjangka extends Tugas {
 
     private DefaultTableModel tabModel;
     private javax.swing.JCheckBox check;

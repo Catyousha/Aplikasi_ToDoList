@@ -5,7 +5,7 @@ import java.util.Date;
 
 
 
-abstract class tugas extends javax.swing.JFrame{
+abstract class Tugas extends javax.swing.JFrame{
 
     protected String NamaTugas;
     protected String StatusTugas;

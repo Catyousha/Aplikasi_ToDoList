@@ -8,7 +8,7 @@ import com.mysql.jdbc.*;
 import javax.swing.JOptionPane;
 import java.sql.*;
 
-public class TugasUmum extends tugas {
+public class TugasUmum extends Tugas {
 
     private DefaultTableModel tabModel;
 

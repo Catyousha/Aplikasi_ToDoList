@@ -8,7 +8,7 @@ import com.mysql.jdbc.*;
 import javax.swing.JOptionPane;
 import java.sql.*;
 
-public class TugasRutin extends tugas {
+public class TugasRutin extends Tugas {
 
     private DefaultTableModel tabModel;
     private javax.swing.JCheckBox check;

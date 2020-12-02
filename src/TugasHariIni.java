@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class TugasHariIni extends tugas {
+public class TugasHariIni extends Tugas {
 
     private DefaultTableModel tabModel;
     private javax.swing.JCheckBox check;
