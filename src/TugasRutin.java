@@ -267,7 +267,7 @@ public class TugasRutin extends Tugas {
     }// </editor-fold>//GEN-END:initComponents
 
     private void TambahTugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TambahTugasActionPerformed
-        setTugas(NamaTugas_Input.getText(), (String) HariRutinitas_Input.getSelectedItem());
+        setTugas(getNamaTugas(), getHariRutinitas());
         tampilData();
     }//GEN-LAST:event_TambahTugasActionPerformed
 

@@ -316,7 +316,7 @@ public class TugasHariIni extends Tugas {
 
     private void TambahTugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TambahTugasActionPerformed
 //        System.out.println(getHari()+" "+getJenis());
-        setTugas(NamaTugas_Input.getText(), (String) StatusTugas_Input.getSelectedItem());
+        setTugas(getNamaTugas(), getStatusTugas());
         tampilData();
     }//GEN-LAST:event_TambahTugasActionPerformed
 
@@ -446,7 +446,6 @@ public class TugasHariIni extends Tugas {
                     deleteTugas(); break;
                 }
                 tabModel.addRow(data);
-
             }
         } catch (SQLException err) {
              JOptionPane.showMessageDialog(null, err.getMessage() );
@@ -456,6 +455,9 @@ public class TugasHariIni extends Tugas {
 
     public void setTugas(String nama, String status){
         try{
+            if(status == null){
+                status = "Belum Selesai";
+            }
             Statement statement = (Statement) Db_Koneksi.getKoneksi().createStatement();
             String sql = "INSERT INTO tugas VALUES(null,'"+nama+"','Belum Selesai','"+getTglHariIni()+"','"+getTglHariIni()+"','"+getHari()+"','"+getTglHariIni()+"','"+getJenis()+"')";
             PreparedStatement p = (PreparedStatement) Db_Koneksi.getKoneksi().prepareStatement(sql);

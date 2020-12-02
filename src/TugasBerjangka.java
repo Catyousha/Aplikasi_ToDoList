@@ -318,12 +318,12 @@ public class TugasBerjangka extends Tugas {
 
     private void TambahTugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TambahTugasActionPerformed
         if(getTglM().length() == 0 && getTglS().length() == 0){
-           setTugas(NamaTugas_Input.getText(), (String) StatusTugas_Input.getSelectedItem());
+           setTugas(getNamaTugas(), getStatusTugas());
         }
         else if(getTglM().length() == 0){
-           setTugas(NamaTugas_Input.getText(), (String) StatusTugas_Input.getSelectedItem(), getTglS());   
+           setTugas(getNamaTugas(), getStatusTugas(), getTglS());   
         } else{
-           setTugas(NamaTugas_Input.getText(), (String) StatusTugas_Input.getSelectedItem(),getTglM(),getTglS());   
+           setTugas(getNamaTugas(), getStatusTugas(),getTglM(),getTglS());   
         }
         
         tampilData();
@@ -435,7 +435,6 @@ public class TugasBerjangka extends Tugas {
                 data[2] = res.getString("StatusTugas");
                 data[3] = res.getDate("TglMulai");
                 data[4] = res.getDate("TglKadaluarsa");
-
                 tabModel.addRow(data);
 
             }
@@ -447,6 +446,9 @@ public class TugasBerjangka extends Tugas {
 
     public void setTugas(String nama, String status){
         try{
+            if(status == null){
+                status = "Belum Selesai";
+            }
             Statement statement = (Statement) Db_Koneksi.getKoneksi().createStatement();
             String sql = "INSERT INTO tugas VALUES(null,'"+nama+"','"+status+"','"+getTglHariIni()+"','"+getTglHariIni()+"',null ,'"+getTglHariIni()+"',2)";
             PreparedStatement p = (PreparedStatement) Db_Koneksi.getKoneksi().prepareStatement(sql);
@@ -462,7 +464,9 @@ public class TugasBerjangka extends Tugas {
     
     public void setTugas(String nama, String status, String selesai){
         try{
-
+            if(status == null){
+                status = "Belum Selesai";
+            }
             Statement statement = (Statement) Db_Koneksi.getKoneksi().createStatement();
             String sql = "INSERT INTO tugas VALUES(null,'"+nama+"','"+status+"','"+getTglHariIni()+"','"+selesai+"',null ,'"+getTglHariIni()+"',2)";
             PreparedStatement p = (PreparedStatement) Db_Koneksi.getKoneksi().prepareStatement(sql);
@@ -478,7 +482,9 @@ public class TugasBerjangka extends Tugas {
     public void setTugas(String nama, String status, String mulai, String selesai){
         
         try{
-            
+            if(status == null){
+                status = "Belum Selesai";
+            }
             Statement statement = (Statement) Db_Koneksi.getKoneksi().createStatement();
             String sql = "INSERT INTO tugas VALUES(null,'"+nama+"','"+status+"','"+mulai+"','"+selesai+"',null,'"+getTglHariIni()+"',2)";
             PreparedStatement p = (PreparedStatement) Db_Koneksi.getKoneksi().prepareStatement(sql);

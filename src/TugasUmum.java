@@ -154,11 +154,6 @@ public class TugasUmum extends Tugas {
                 IDTugas_InputInputMethodTextChanged(evt);
             }
         });
-        IDTugas_Input.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                IDTugas_InputActionPerformed(evt);
-            }
-        });
         IDTugas_Input.setVisible(false);
 
         EditTugas.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
@@ -185,11 +180,6 @@ public class TugasUmum extends Tugas {
         StatusTugas_Input.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 StatusTugas_InputItemStateChanged(evt);
-            }
-        });
-        StatusTugas_Input.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                StatusTugas_InputActionPerformed(evt);
             }
         });
 
@@ -277,32 +267,18 @@ public class TugasUmum extends Tugas {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void IDTugas_InputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IDTugas_InputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_IDTugas_InputActionPerformed
-
     private void EditTugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditTugasActionPerformed
-        /*setIDTugas(IDTugas_Input.getText());
-        setNamaTugas(NamaTugas_Input.getText());
-        setStatusTugas((String) StatusTugas_Input.getSelectedItem());*/
         editTugas(getIDTugas(), getNamaTugas(), getStatusTugas());
         tampilData();
     }//GEN-LAST:event_EditTugasActionPerformed
 
     private void HapusTugas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HapusTugas1ActionPerformed
-        /*setIDTugas(IDTugas_Input.getText());*/
         deleteTugas(getIDTugas());
         tampilData();
     }//GEN-LAST:event_HapusTugas1ActionPerformed
 
-    private void StatusTugas_InputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StatusTugas_InputActionPerformed
-//        loadStatus();
-    }//GEN-LAST:event_StatusTugas_InputActionPerformed
-
     private void TambahTugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TambahTugasActionPerformed
-        /*setNamaTugas(NamaTugas_Input.getText());
-        setStatusTugas((String) StatusTugas_Input.getSelectedItem());*/
-        setTugas(NamaTugas_Input.getText(), (String) StatusTugas_Input.getSelectedItem());
+        setTugas(getNamaTugas(), getStatusTugas());
         tampilData();
     }//GEN-LAST:event_TambahTugasActionPerformed
 
@@ -372,7 +348,6 @@ public class TugasUmum extends Tugas {
                 data[0] = res.getString("IDTugas");
                 data[1] = res.getString("NamaTugas");
                 data[2] = res.getString("StatusTugas");
-
                 tabModel.addRow(data);
                 
             }
@@ -384,11 +359,14 @@ public class TugasUmum extends Tugas {
     
     public void setTugas(String nama, String status) {
         try {
+            if(status == null){
+                status = "Belum Selesai";
+            }
             Statement statement = (Statement) Db_Koneksi.getKoneksi().createStatement();
             String sql = "INSERT INTO tugas VALUES(null,'" + nama + "','" + status + "',null, null, null,'" + getTglHariIni() + "',1)";
             PreparedStatement p = (PreparedStatement) Db_Koneksi.getKoneksi().prepareStatement(sql);
             p.executeUpdate();
-            JOptionPane.showMessageDialog(rootPane, "Tugas Berhasil Ditambah");
+            JOptionPane.showMessageDialog(rootPane, "Tugas Berhasil Ditambahkan");
         } catch (SQLException err) {
             JOptionPane.showMessageDialog(null, "Tugas Gagal Ditambahkan!");
         }
