@@ -12,10 +12,11 @@ public class TugasRutin extends tugas {
 
     private DefaultTableModel tabModel;
     private javax.swing.JCheckBox check;
+    private String HariRutinitas;
     
     public TugasRutin() {
         initComponents();
-        IDTugas.setEnabled(false);
+        IDTugas_Input.setEnabled(false);
         
         tabModel = new DefaultTableModel();
         tabModel.addColumn("ID Tugas");
@@ -46,13 +47,13 @@ public class TugasRutin extends tugas {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        NamaTugas = new javax.swing.JTextField();
+        NamaTugas_Input = new javax.swing.JTextField();
         TambahTugas = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        IDTugas = new javax.swing.JTextField();
+        IDTugas_Input = new javax.swing.JTextField();
         EditTugas = new javax.swing.JButton();
-        HariRutinitas = new javax.swing.JComboBox<>();
+        HariRutinitas_Input = new javax.swing.JComboBox<>();
 
         jButton3.setText("jButton3");
 
@@ -132,8 +133,13 @@ public class TugasRutin extends tugas {
         jLabel1.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         jLabel1.setText("Nama Tugas :");
 
-        NamaTugas.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
-        NamaTugas.setSelectionColor(new java.awt.Color(255, 153, 153));
+        NamaTugas_Input.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+        NamaTugas_Input.setSelectionColor(new java.awt.Color(255, 153, 153));
+        NamaTugas_Input.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                NamaTugas_InputCaretUpdate(evt);
+            }
+        });
 
         TambahTugas.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
         TambahTugas.setText("Tambahkan");
@@ -149,13 +155,15 @@ public class TugasRutin extends tugas {
         jLabel3.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         jLabel3.setText("Tugas yang muncul adalah tugas rutin yang telah ditambahkan sebelumnya");
 
-        IDTugas.setEditable(false);
-        IDTugas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                IDTugasActionPerformed(evt);
+        IDTugas_Input.setEditable(false);
+        IDTugas_Input.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                IDTugas_InputInputMethodTextChanged(evt);
             }
         });
-        IDTugas.setVisible(false);
+        IDTugas_Input.setVisible(false);
 
         EditTugas.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
         EditTugas.setText("Simpan Perubahan");
@@ -165,8 +173,13 @@ public class TugasRutin extends tugas {
             }
         });
 
-        HariRutinitas.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
-        HariRutinitas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu" }));
+        HariRutinitas_Input.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+        HariRutinitas_Input.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu" }));
+        HariRutinitas_Input.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                HariRutinitas_InputItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -191,9 +204,9 @@ public class TugasRutin extends tugas {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(NamaTugas, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(IDTugas, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(HariRutinitas, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(NamaTugas_Input, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(IDTugas_Input, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(HariRutinitas_Input, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(49, 49, 49)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(TambahTugas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -225,16 +238,16 @@ public class TugasRutin extends tugas {
                 .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(NamaTugas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(NamaTugas_Input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TambahTugas))
                 .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(EditTugas)
-                    .addComponent(HariRutinitas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(HariRutinitas_Input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(IDTugas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(IDTugas_Input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(HapusTugas))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
@@ -254,7 +267,7 @@ public class TugasRutin extends tugas {
     }// </editor-fold>//GEN-END:initComponents
 
     private void TambahTugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TambahTugasActionPerformed
-        setTugas(getNamaTugas(), getHariRutinitas());
+        setTugas(NamaTugas_Input.getText(), (String) HariRutinitas_Input.getSelectedItem());
         tampilData();
     }//GEN-LAST:event_TambahTugasActionPerformed
 
@@ -266,17 +279,17 @@ public class TugasRutin extends tugas {
         
         try{
             int row = jTable1.rowAtPoint(evt.getPoint());
-            id = jTable1.getModel().getValueAt(row, 0).toString();
-            nama = jTable1.getValueAt(row, 0).toString();
-            hari = jTable1.getValueAt(row, 1).toString();
+            String id = jTable1.getModel().getValueAt(row, 0).toString();
+            String nama = jTable1.getValueAt(row, 0).toString();
+            String hari = jTable1.getValueAt(row, 1).toString();
             
             setIDTugas(String.valueOf(id));
-            setTugas(String.valueOf(nama));
+            setNamaTugas(String.valueOf(nama));
             setHariRutinitas(String.valueOf(hari));
 
-            IDTugas.setText(String.valueOf(id));
-            NamaTugas.setText(String.valueOf(nama));
-            HariRutinitas.setSelectedItem(String.valueOf(hari));
+            IDTugas_Input.setText(getIDTugas());
+            NamaTugas_Input.setText(getNamaTugas());
+            HariRutinitas_Input.setSelectedItem(getHariRutinitas());
 
         }catch(Exception e){
 
@@ -289,7 +302,7 @@ public class TugasRutin extends tugas {
     }//GEN-LAST:event_HapusTugasActionPerformed
 
     private void EditTugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditTugasActionPerformed
-        editTugas(getIDTugas(),getNamaTugas(),getHariRutinitas());
+        editTugas(getIDTugas(), getNamaTugas(), getHariRutinitas());
         tampilData();
     }//GEN-LAST:event_EditTugasActionPerformed
 
@@ -309,43 +322,30 @@ public class TugasRutin extends tugas {
         tRutin();
     }//GEN-LAST:event_TugasRutinActionPerformed
 
-    private void IDTugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IDTugasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_IDTugasActionPerformed
+    private void NamaTugas_InputCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_NamaTugas_InputCaretUpdate
+        setNamaTugas(NamaTugas_Input.getText());
+    }//GEN-LAST:event_NamaTugas_InputCaretUpdate
+
+    private void IDTugas_InputInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_IDTugas_InputInputMethodTextChanged
+       setIDTugas(IDTugas_Input.getText());
+    }//GEN-LAST:event_IDTugas_InputInputMethodTextChanged
+
+    private void HariRutinitas_InputItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_HariRutinitas_InputItemStateChanged
+        setHariRutinitas((String) HariRutinitas_Input.getSelectedItem());
+    }//GEN-LAST:event_HariRutinitas_InputItemStateChanged
+                                                                                                 
 
     /**
      * @param args the command line arguments
      */
     
     
-    
-    public void setIDTugas(String id){
-        this.id = id;
-    }
-    
-    public void setTugas(String nama){
-        this.nama = nama;
-    }
-    
     public void setHariRutinitas(String hari){
-        this.hari = hari;
-    }
-    
-    public String getNamaTugas(){
-        return NamaTugas.getText();
-    }
-    
-    public String getIDTugas(){
-        return IDTugas.getText();
-    }
-    
-    public String getStatusTugas(){
-        return StatusTugas;
+        this.HariRutinitas = hari;
     }
     
     public String getHariRutinitas(){
-        status = (String) HariRutinitas.getSelectedItem();
-        return status;
+        return this.HariRutinitas;
     }
     
     public void tampilData() {
@@ -376,6 +376,7 @@ public class TugasRutin extends tugas {
         
     }
     
+    
     public void setTugas(String nama, String harirutinitas){
         try{
             Statement statement = (Statement) Db_Koneksi.getKoneksi().createStatement();
@@ -386,7 +387,6 @@ public class TugasRutin extends tugas {
         }catch (SQLException err){
             JOptionPane.showMessageDialog(null, "Tugas Gagal Ditambahkan!" );
         }
-        
     }
     
     public void editTugas(String id, String nama, String hari){
@@ -453,9 +453,9 @@ public class TugasRutin extends tugas {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton EditTugas;
     private javax.swing.JButton HapusTugas;
-    private javax.swing.JComboBox<String> HariRutinitas;
-    private javax.swing.JTextField IDTugas;
-    private javax.swing.JTextField NamaTugas;
+    private javax.swing.JComboBox<String> HariRutinitas_Input;
+    private javax.swing.JTextField IDTugas_Input;
+    private javax.swing.JTextField NamaTugas_Input;
     private javax.swing.JButton TambahTugas;
     private javax.swing.JButton TugasBerjangka;
     private javax.swing.JButton TugasHariIni;

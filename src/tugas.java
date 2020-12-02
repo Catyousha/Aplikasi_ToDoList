@@ -6,56 +6,55 @@ import java.util.Date;
 
 
 abstract class tugas extends javax.swing.JFrame{
+
+    protected String NamaTugas;
+    protected String StatusTugas;
+    protected String IDTugas;
+    protected String TglHariIni;
     
-    protected String NamaTugas, nama;
-    protected String StatusTugas, status;
-    protected String IDTugas, id;
-    protected String EditTugas, HapusTugas, TambahTugas;
-    protected String hari, day;
-    
-    private Calendar cal = Calendar.getInstance();
-    private String tgl;
-    
-    abstract void setIDTugas(String id);
     abstract void tampilData();
-    abstract void setTugas(String nama);
-    abstract void deleteTugas(String id);
+    abstract void setTugas(String nama, String status);
+    abstract void editTugas(String id, String nama, String status);
+    abstract void deleteTugas(String id);    
     
-    public void editTugas(){};
+    public void setIDTugas(String id){
+        this.IDTugas = id;
+    };
+    public void setNamaTugas(String nama){
+        this.NamaTugas = nama;
+    };
+    public void setStatusTugas(String status){
+        this.StatusTugas = status;
+    };
     
     public String getIDTugas(){
         return this.IDTugas;
     };
-    
     public String getNamaTugas(){
         return this.NamaTugas;
     };
-    
     public String getStatusTugas(){
         return this.StatusTugas;
     };
     
     public void setTglHariIni(){
         SimpleDateFormat tanggal = new SimpleDateFormat("yyyy-MM-dd");
-        this.tgl = tanggal.format(cal.getTime());
+        Calendar cal = Calendar.getInstance();
+        this.TglHariIni = tanggal.format(cal.getTime());
     }
     
     public String getTglHariIni(){
         setTglHariIni();
-        return this.tgl;
-    }
-    
-    public String getDay(){
-        Date tgll = new Date();
-        SimpleDateFormat formatter = null;
-        formatter = new SimpleDateFormat("EEEE");
-        day = formatter.format(tgll);
-        return day;
+        return this.TglHariIni;
     }
     
     public String getHari(){
-        
-        switch(getDay()){
+        String hari = "";
+        Date tgll = new Date();
+        SimpleDateFormat formatter = null;
+        formatter = new SimpleDateFormat("EEEE");
+        String day = formatter.format(tgll);
+        switch(day){
             case "Sunday":
                 hari = "Minggu";
             break;

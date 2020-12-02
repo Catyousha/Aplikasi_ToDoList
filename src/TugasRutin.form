@@ -77,9 +77,9 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="NamaTugas" alignment="0" min="-2" pref="354" max="-2" attributes="0"/>
-                              <Component id="IDTugas" alignment="0" min="-2" pref="66" max="-2" attributes="0"/>
-                              <Component id="HariRutinitas" alignment="0" min="-2" pref="144" max="-2" attributes="0"/>
+                              <Component id="NamaTugas_Input" alignment="0" min="-2" pref="354" max="-2" attributes="0"/>
+                              <Component id="IDTugas_Input" alignment="0" min="-2" pref="66" max="-2" attributes="0"/>
+                              <Component id="HariRutinitas_Input" alignment="0" min="-2" pref="144" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -120,18 +120,18 @@
                   <EmptySpace min="28" pref="28" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="NamaTugas" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="NamaTugas_Input" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="TambahTugas" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="EditTugas" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="HariRutinitas" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="HariRutinitas_Input" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="IDTugas" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="IDTugas_Input" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="HapusTugas" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="21" max="32767" attributes="0"/>
@@ -257,7 +257,7 @@
             <Property name="text" type="java.lang.String" value="Nama Tugas :"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="NamaTugas">
+        <Component class="javax.swing.JTextField" name="NamaTugas_Input">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Berlin Sans FB" size="14" style="0"/>
@@ -266,6 +266,9 @@
               <Color blue="99" green="99" red="ff" type="rgb"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="NamaTugas_InputCaretUpdate"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="TambahTugas">
           <Properties>
@@ -294,15 +297,15 @@
             <Property name="text" type="java.lang.String" value="Tugas yang muncul adalah tugas rutin yang telah ditambahkan sebelumnya"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="IDTugas">
+        <Component class="javax.swing.JTextField" name="IDTugas_Input">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="IDTugasActionPerformed"/>
+            <EventHandler event="inputMethodTextChanged" listener="java.awt.event.InputMethodListener" parameters="java.awt.event.InputMethodEvent" handler="IDTugas_InputInputMethodTextChanged"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="IDTugas.setVisible(false);"/>
+            <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="IDTugas_Input.setVisible(false);"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="EditTugas">
@@ -316,7 +319,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EditTugasActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JComboBox" name="HariRutinitas">
+        <Component class="javax.swing.JComboBox" name="HariRutinitas_Input">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Berlin Sans FB" size="14" style="0"/>
@@ -333,6 +336,9 @@
               </StringArray>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="HariRutinitas_InputItemStateChanged"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>

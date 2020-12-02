@@ -58,11 +58,11 @@
                           <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
                           <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="TanggalMulai" min="-2" pref="162" max="-2" attributes="0"/>
+                          <Component id="TanggalMulai_Input" min="-2" pref="162" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                          <Component id="TanggalKadaluarsa" min="-2" pref="168" max="-2" attributes="0"/>
+                          <Component id="TanggalKadaluarsa_Input" min="-2" pref="168" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="EditTugas" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -87,7 +87,7 @@
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jScrollPane1" min="-2" pref="645" max="-2" attributes="0"/>
                               <Group type="102" attributes="0">
-                                  <Component id="NamaTugas" min="-2" pref="474" max="-2" attributes="0"/>
+                                  <Component id="NamaTugas_Input" min="-2" pref="474" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Component id="TambahTugas" min="-2" pref="131" max="-2" attributes="0"/>
                               </Group>
@@ -97,9 +97,9 @@
                           <EmptySpace min="-2" pref="138" max="-2" attributes="0"/>
                           <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="StatusTugas" min="-2" pref="157" max="-2" attributes="0"/>
+                          <Component id="StatusTugas_Input" min="-2" pref="157" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="IDTugas" min="-2" pref="83" max="-2" attributes="0"/>
+                          <Component id="IDTugas_Input" min="-2" pref="83" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                           <Component id="HapusTugas" min="-2" pref="131" max="-2" attributes="0"/>
                       </Group>
@@ -126,25 +126,25 @@
                   </Group>
                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="NamaTugas" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="NamaTugas_Input" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="TambahTugas" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="TanggalKadaluarsa" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="TanggalKadaluarsa_Input" min="-2" pref="24" max="-2" attributes="0"/>
                       <Component id="EditTugas" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel2" alignment="0" min="-2" pref="24" max="-2" attributes="0"/>
-                      <Component id="TanggalMulai" alignment="0" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="TanggalMulai_Input" alignment="0" min="-2" pref="24" max="-2" attributes="0"/>
                       <Component id="jLabel3" min="-2" pref="24" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                          <Component id="StatusTugas" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="StatusTugas_Input" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="IDTugas" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="IDTugas_Input" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="HapusTugas" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="28" max="32767" attributes="0"/>
@@ -301,7 +301,7 @@
             <Property name="text" type="java.lang.String" value="Nama Tugas :"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="NamaTugas">
+        <Component class="javax.swing.JTextField" name="NamaTugas_Input">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Berlin Sans FB" size="14" style="0"/>
@@ -310,6 +310,9 @@
               <Color blue="99" green="99" red="ff" type="rgb"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="NamaTugas_InputCaretUpdate"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="TambahTugas">
           <Properties>
@@ -322,12 +325,12 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TambahTugasActionPerformed"/>
           </Events>
         </Component>
-        <Component class="com.toedter.calendar.JDateChooser" name="TanggalMulai">
+        <Component class="com.toedter.calendar.JDateChooser" name="TanggalMulai_Input">
           <Properties>
             <Property name="dateFormatString" type="java.lang.String" value="yyyy-MM-dd"/>
           </Properties>
         </Component>
-        <Component class="com.toedter.calendar.JDateChooser" name="TanggalKadaluarsa">
+        <Component class="com.toedter.calendar.JDateChooser" name="TanggalKadaluarsa_Input">
           <Properties>
             <Property name="dateFormatString" type="java.lang.String" value="YYYY-MM-dd"/>
           </Properties>
@@ -359,12 +362,15 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EditTugasActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="IDTugas">
+        <Component class="javax.swing.JTextField" name="IDTugas_Input">
+          <Events>
+            <EventHandler event="inputMethodTextChanged" listener="java.awt.event.InputMethodListener" parameters="java.awt.event.InputMethodEvent" handler="IDTugas_InputInputMethodTextChanged"/>
+          </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="IDTugas.setVisible(false);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="IDTugas_Input.setVisible(false);"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JComboBox" name="StatusTugas">
+        <Component class="javax.swing.JComboBox" name="StatusTugas_Input">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Berlin Sans FB" size="14" style="0"/>
@@ -377,7 +383,8 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="StatusTugasActionPerformed"/>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="StatusTugas_InputItemStateChanged"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="StatusTugas_InputActionPerformed"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>

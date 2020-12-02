@@ -50,7 +50,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="195" max="-2" attributes="0"/>
-                          <Component id="IDTugas" min="-2" pref="66" max="-2" attributes="0"/>
+                          <Component id="IDTugas_Input" min="-2" pref="66" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
@@ -59,13 +59,13 @@
                               <Group type="102" attributes="0">
                                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="StatusTugas" min="-2" pref="157" max="-2" attributes="0"/>
+                                  <Component id="StatusTugas_Input" min="-2" pref="157" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="194" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="NamaTugas" min="-2" pref="351" max="-2" attributes="0"/>
+                                  <Component id="NamaTugas_Input" min="-2" pref="351" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
@@ -111,18 +111,18 @@
                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="NamaTugas" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="NamaTugas_Input" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="TambahTugas" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="EditTugas" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="StatusTugas" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="StatusTugas_Input" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="IDTugas" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="IDTugas_Input" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="HapusTugas1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="32" max="32767" attributes="0"/>
@@ -253,7 +253,7 @@
             <Property name="text" type="java.lang.String" value="Nama Tugas :"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="NamaTugas">
+        <Component class="javax.swing.JTextField" name="NamaTugas_Input">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Berlin Sans FB" size="14" style="0"/>
@@ -262,6 +262,9 @@
               <Color blue="99" green="99" red="ff" type="rgb"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="NamaTugas_InputCaretUpdate"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="TambahTugas">
           <Properties>
@@ -274,12 +277,13 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TambahTugasActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="IDTugas">
+        <Component class="javax.swing.JTextField" name="IDTugas_Input">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="IDTugasActionPerformed"/>
+            <EventHandler event="inputMethodTextChanged" listener="java.awt.event.InputMethodListener" parameters="java.awt.event.InputMethodEvent" handler="IDTugas_InputInputMethodTextChanged"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="IDTugas_InputActionPerformed"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="IDTugas.setVisible(false);"/>
+            <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="IDTugas_Input.setVisible(false);"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="EditTugas">
@@ -312,7 +316,7 @@
             <Property name="text" type="java.lang.String" value="Status :"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="StatusTugas">
+        <Component class="javax.swing.JComboBox" name="StatusTugas_Input">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Berlin Sans FB" size="14" style="0"/>
@@ -325,7 +329,8 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="StatusTugasActionPerformed"/>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="StatusTugas_InputItemStateChanged"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="StatusTugas_InputActionPerformed"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
