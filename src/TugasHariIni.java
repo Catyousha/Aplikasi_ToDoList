@@ -315,7 +315,7 @@ public class TugasHariIni extends Tugas {
     }//GEN-LAST:event_StatusTugasActionPerformed
 
     private void TambahTugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TambahTugasActionPerformed
-//        System.out.println(getHari()+" "+getJenis());
+//        System.out.println(getHari()+" "+getJenisTugas());
         setTugas(getNamaTugas(), getStatusTugas());
         tampilData();
     }//GEN-LAST:event_TambahTugasActionPerformed
@@ -414,7 +414,7 @@ public class TugasHariIni extends Tugas {
         return cek;
     }
     
-    public String getJenis(){
+    public String getJenisTugas(){
         if(RutinitasHarian.isSelected()){
             return "5";
         }else{
@@ -459,7 +459,7 @@ public class TugasHariIni extends Tugas {
                 status = "Belum Selesai";
             }
             Statement statement = (Statement) Db_Koneksi.getKoneksi().createStatement();
-            String sql = "INSERT INTO tugas VALUES(null,'"+nama+"','Belum Selesai','"+getTglHariIni()+"','"+getTglHariIni()+"','"+getHari()+"','"+getTglHariIni()+"','"+getJenis()+"')";
+            String sql = "INSERT INTO tugas VALUES(null,'"+nama+"','Belum Selesai','"+getTglHariIni()+"','"+getTglHariIni()+"','"+getHari()+"','"+getTglHariIni()+"','"+getJenisTugas()+"')";
             PreparedStatement p = (PreparedStatement) Db_Koneksi.getKoneksi().prepareStatement(sql);
             p.executeUpdate();
             JOptionPane.showMessageDialog(rootPane, "Tugas Berhasil Ditambahkan");
@@ -473,7 +473,7 @@ public class TugasHariIni extends Tugas {
         
         try{
             Statement statement = (Statement) Db_Koneksi.getKoneksi().createStatement();
-            String sql = "UPDATE tugas SET NamaTugas='"+nama+"', StatusTugas='"+status+"', Jenis='"+getJenis()+"' WHERE IDTugas="+id;
+            String sql = "UPDATE tugas SET NamaTugas='"+nama+"', StatusTugas='"+status+"', Jenis='"+getJenisTugas()+"' WHERE IDTugas="+id;
             PreparedStatement p = (PreparedStatement) Db_Koneksi.getKoneksi().prepareStatement(sql);
             p.executeUpdate();
             JOptionPane.showMessageDialog(rootPane, "Tugas Berhasil Diubah");
