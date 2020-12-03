@@ -355,7 +355,7 @@ public class TugasRutin extends Tugas {
         //menampilkan data database kedalam tabel
         try {
             Statement stat = (Statement) Db_Koneksi.getKoneksi( ).createStatement( );
-            String sql        = "SELECT * FROM tugas WHERE Jenis=4 OR Jenis=5";
+            String sql        = "SELECT * FROM tugas WHERE Jenis=4";
             ResultSet res   = stat.executeQuery(sql);
            
             while (res.next()) {
@@ -380,7 +380,7 @@ public class TugasRutin extends Tugas {
                 harirutinitas = "Senin";
             }
             Statement statement = (Statement) Db_Koneksi.getKoneksi().createStatement();
-            String sql = "INSERT INTO tugas VALUES(null,'"+nama+"','',NULL, NULL,'"+harirutinitas+"','"+getTglHariIni()+"',5)";
+            String sql = "INSERT INTO tugas VALUES(null,'"+nama+"','',NULL, NULL,'"+harirutinitas+"','"+getTglHariIni()+"',4)";
             PreparedStatement p = (PreparedStatement) Db_Koneksi.getKoneksi().prepareStatement(sql);
             p.executeUpdate();
             JOptionPane.showMessageDialog(rootPane, "Tugas Berhasil Ditambahkan");
