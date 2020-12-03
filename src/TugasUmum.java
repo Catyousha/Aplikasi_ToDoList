@@ -1,10 +1,7 @@
-import java.sql.Connection;
-import java.sql.ResultSet;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.DefaultTableModel;
 import Koneksi.Db_Koneksi;
-import java.sql.SQLException;
-import com.mysql.jdbc.*;
+//import com.mysql.jdbc.*;
 import javax.swing.JOptionPane;
 import java.sql.*;
 
