@@ -379,8 +379,11 @@ public class TugasRutin extends Tugas {
     
     public void setTugas(String nama, String harirutinitas){
         try{
+            if(harirutinitas == null){
+                harirutinitas = "Senin";
+            }
             Statement statement = (Statement) Db_Koneksi.getKoneksi().createStatement();
-            String sql = "INSERT INTO tugas VALUES(null,'"+nama+"','',NULL, NULL,'"+harirutinitas+"','"+getTglHariIni()+"',4)";
+            String sql = "INSERT INTO tugas VALUES(null,'"+nama+"','',NULL, NULL,'"+harirutinitas+"','"+getTglHariIni()+"',5)";
             PreparedStatement p = (PreparedStatement) Db_Koneksi.getKoneksi().prepareStatement(sql);
             p.executeUpdate();
             JOptionPane.showMessageDialog(rootPane, "Tugas Berhasil Ditambahkan");

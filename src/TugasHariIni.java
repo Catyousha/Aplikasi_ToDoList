@@ -397,7 +397,7 @@ public class TugasHariIni extends Tugas {
         boolean cek = false;
         try {
             Statement stat = (Statement) Db_Koneksi.getKoneksi( ).createStatement( );
-            String sql        = "SELECT * FROM tugas WHERE HariRutinitas IS NOT NULL AND IDTugas="+getIDTugas();
+            String sql        = "SELECT * FROM tugas WHERE Jenis = '4' AND IDTugas="+getIDTugas();
             ResultSet res   = stat.executeQuery(sql);
             while (res.next()) {
                 Object[] data = new Object[1];
@@ -416,7 +416,7 @@ public class TugasHariIni extends Tugas {
     
     public String getJenisTugas(){
         if(RutinitasHarian.isSelected()){
-            return "5";
+            return "4";
         }else{
             return "3";
         }
@@ -429,7 +429,7 @@ public class TugasHariIni extends Tugas {
         //menampilkan data database kedalam tabel
         try {
             Statement stat = (Statement) Db_Koneksi.getKoneksi( ).createStatement( );
-            String sql        = "SELECT * FROM tugas WHERE Jenis=3 OR Jenis=5 OR HariRutinitas='"+getHari()+"'";
+            String sql        = "SELECT * FROM tugas WHERE Jenis=3 OR HariRutinitas='"+getHari()+"' AND TglSkrg = '"+getTglHariIni()+"'";
             ResultSet res   = stat.executeQuery(sql);
            
             while (res.next()) {
@@ -442,8 +442,8 @@ public class TugasHariIni extends Tugas {
                 if(res.getString("StatusTugas").length() == 0){
                     data[2] = "Belum Selesai";
                 }
-                if(!( res.getString("TglSkrg").equals(getTglHariIni()) )){
-                    deleteTugas(); break;
+                if(( res.getString("Jenis").equals("3") ) && !( res.getString("TglSkrg").equals(getTglHariIni()) )){
+                    deleteTugas();
                 }
                 tabModel.addRow(data);
             }

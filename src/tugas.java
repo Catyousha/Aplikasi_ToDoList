@@ -2,6 +2,7 @@
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 
 
@@ -38,8 +39,9 @@ abstract class Tugas extends javax.swing.JFrame{
     };
     
     public void setTglHariIni(){
+        TimeZone tz = TimeZone.getTimeZone("Asia/Jakarta");
         SimpleDateFormat tanggal = new SimpleDateFormat("yyyy-MM-dd");
-        Calendar cal = Calendar.getInstance();
+        Calendar cal = Calendar.getInstance(tz);
         this.TglHariIni = tanggal.format(cal.getTime());
     }
     
